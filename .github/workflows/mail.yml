@@ -1,0 +1,24 @@
+name: Basic Deploy
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+      build: 
+        name: Build
+        runs-on: ubuntu-latest
+        # env:
+        #   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+        steps:
+
+          - name: "SSH and run commands"
+            uses: appleboy/ssh-action@master
+            with:
+              host: ${{ secrets[host] }}
+              username: ${{ secrets[username] }}
+              key: ${{ secrets[ssh_key] }}
+              script: |
+                  cd /usr/share/nginx/html/
+                  git pull origin main
