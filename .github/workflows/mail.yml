@@ -4,6 +4,16 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      choice:
+        type: choice
+        description: Select Environment 
+        options:
+        - dev
+        - stage
+        - prod
+    
+  
 
 jobs:
       build: 
